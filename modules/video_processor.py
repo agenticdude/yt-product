@@ -117,31 +117,6 @@ def scale_video_to_1080p(input_path, output_path, quality_preset="high_quality")
             "spatial_aq": "1",
             "temporal_aq": "1",
             "audio_bitrate": "320k"
-        },
-        # Legacy preset mappings (redirect to new presets)
-        "fastest": {
-            "gpu_preset": "p4",
-            "cq": "23",
-            "multipass": "disabled",
-            "spatial_aq": "0",
-            "temporal_aq": "0",
-            "audio_bitrate": "256k"
-        },
-        "fast": {
-            "gpu_preset": "p6",
-            "cq": "19",
-            "multipass": "fullres",
-            "spatial_aq": "1",
-            "temporal_aq": "1",
-            "audio_bitrate": "320k"
-        },
-        "balanced": {
-            "gpu_preset": "p6",
-            "cq": "19",
-            "multipass": "fullres",
-            "spatial_aq": "1",
-            "temporal_aq": "1",
-            "audio_bitrate": "320k"
         }
     }
     
@@ -290,31 +265,7 @@ def combine_video_audio(video_path, audio_path, output_path, quality_preset="hig
             "temporal_aq": "1",
             "audio_bitrate": "320k"
         },
-        # Legacy mappings
-        "fastest": {
-            "gpu_preset": "p4",
-            "cq": "23",
-            "multipass": "disabled",
-            "spatial_aq": "0",
-            "temporal_aq": "0",
-            "audio_bitrate": "256k"
-        },
-        "fast": {
-            "gpu_preset": "p6",
-            "cq": "19",
-            "multipass": "fullres",
-            "spatial_aq": "1",
-            "temporal_aq": "1",
-            "audio_bitrate": "320k"
-        },
-        "balanced": {
-            "gpu_preset": "p6",
-            "cq": "19",
-            "multipass": "fullres",
-            "spatial_aq": "1",
-            "temporal_aq": "1",
-            "audio_bitrate": "320k"
-        }
+       
     }
     
     selected_quality = quality_settings.get(quality_preset, quality_settings["high_quality"])

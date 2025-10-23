@@ -270,11 +270,7 @@ def _apply_overlay_to_segment(
     quality_settings = {
         "ultra_fast": {"gpu_preset": "p4", "cq": "23"},
         "high_quality": {"gpu_preset": "p6", "cq": "19"},
-        "maximum_quality": {"gpu_preset": "p7", "cq": "17"},
-        # Legacy mappings
-        "fastest": {"gpu_preset": "p4", "cq": "23"},
-        "fast": {"gpu_preset": "p6", "cq": "19"},
-        "balanced": {"gpu_preset": "p6", "cq": "19"}
+        "maximum_quality": {"gpu_preset": "p7", "cq": "17"}
     }
     
     selected = quality_settings.get(quality_preset, quality_settings["high_quality"])
@@ -347,11 +343,7 @@ def _apply_overlay_standard(
     quality_settings = {
         "ultra_fast": {"gpu_preset": "p4", "cq": "23"},
         "high_quality": {"gpu_preset": "p6", "cq": "19"},
-        "maximum_quality": {"gpu_preset": "p7", "cq": "17"},
-        # Legacy mappings
-        "fastest": {"gpu_preset": "p4", "cq": "23"},
-        "fast": {"gpu_preset": "p6", "cq": "19"},
-        "balanced": {"gpu_preset": "p6", "cq": "19"}
+        "maximum_quality": {"gpu_preset": "p7", "cq": "17"}
     }
     
     selected = quality_settings.get(quality_preset, quality_settings["high_quality"])
@@ -388,53 +380,6 @@ def _apply_overlay_standard(
     
     logger.info(f"✓ Standard GPU overlay complete: {output_path}")
     return str(output_path)
-
-
-# Legacy function for backward compatibility
-def apply_video_overlay(
-    main_video_path,
-    overlay_video_path,
-    output_path,
-    timing_mode="range",
-    start_time=0,
-    end_time=None,
-    position="top-right",
-    size_percent=20,
-    remove_green=True,
-    green_similarity=0.3,
-    green_blend=0.1,
-    keep_overlay_audio=False,
-    quality_preset="fast"
-):
-    """
-    Legacy function - calls the new GPU-optimized function
-    Kept for backward compatibility
-    """
-    # Convert timing_mode from old format
-    if timing_mode == "range":
-        new_timing_mode = "custom_time"
-    elif timing_mode == "original":
-        new_timing_mode = "overlay_duration"
-    else:
-        new_timing_mode = "custom_time"
-    
-    return apply_video_overlay_smart(
-        main_video_path=main_video_path,
-        overlay_video_path=overlay_video_path,
-        output_path=output_path,
-        timing_mode=new_timing_mode,
-        start_time=start_time,
-        end_time=end_time,
-        position=position,
-        size_percent=size_percent,
-        remove_green=remove_green,
-        green_similarity=green_similarity,
-        green_blend=green_blend,
-        keep_overlay_audio=keep_overlay_audio,
-        quality_preset=quality_preset,
-        optimize=True  # Auto-optimize by default
-    )
-
 
 if __name__ == "__main__":
     print("=" * 60)

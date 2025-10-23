@@ -1,5 +1,4 @@
 """
-Video Processor Module - Step 5 - GPU ONLY
 100% GPU-optimized with auto detection, time tracking, and stream copy
 Requires NVIDIA GPU with CUDA support - NO CPU FALLBACK
 """
