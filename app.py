@@ -68,6 +68,16 @@ def main():
         st.warning("⚠️ Please create or load a project to continue with other steps")
         return
     
+    # Load project-specific API keys if a project is loaded
+    if st.session_state.get('current_project_path'):
+        manager = ProjectManagerApp().manager # Access the ProjectManager instance
+        project_config = manager.load_project_config(st.session_state.current_project_path)
+        if project_config:
+            if 'claude_api_key' in project_config and project_config['claude_api_key']:
+                st.session_state.claude_api_key = project_config['claude_api_key']
+            if 'tts_endpoint' in project_config and project_config['tts_endpoint']:
+                st.session_state.tts_endpoint = project_config['tts_endpoint']
+
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
     
     # ==================== STEP 0.5: API Configuration ====================
@@ -89,6 +99,12 @@ def main():
             
             if claude_key != st.session_state.claude_api_key:
                 st.session_state.claude_api_key = claude_key
+                if st.session_state.get('current_project_path'):
+                    manager = ProjectManagerApp().manager
+                    project_config = manager.load_project_config(st.session_state.current_project_path)
+                    if project_config:
+                        project_config['claude_api_key'] = claude_key
+                        manager.save_project_config(st.session_state.current_project_path, project_config)
                 if claude_key:
                     st.success("✅ Claude API Key updated")
             
@@ -108,6 +124,12 @@ def main():
             
             if tts_endpoint != st.session_state.tts_endpoint:
                 st.session_state.tts_endpoint = tts_endpoint
+                if st.session_state.get('current_project_path'):
+                    manager = ProjectManagerApp().manager
+                    project_config = manager.load_project_config(st.session_state.current_project_path)
+                    if project_config:
+                        project_config['tts_endpoint'] = tts_endpoint
+                        manager.save_project_config(st.session_state.current_project_path, project_config)
                 st.success("✅ TTS Endpoint updated")
             
             if st.session_state.tts_endpoint:

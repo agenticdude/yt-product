@@ -64,6 +64,12 @@ class ProjectManager:
                 return json.load(f)
         return None
     
+    def save_project_config(self, project_path, config):
+        """Save project configuration"""
+        config_file = Path(project_path) / "project_config.json"
+        with open(config_file, 'w', encoding='utf-8') as f:
+            json.dump(config, f, indent=2)
+
     def create_channel_structure(self, project_path, channel_name):
         """Create channel folders: transcripts and Rewritten"""
         channel_path = Path(project_path) / channel_name

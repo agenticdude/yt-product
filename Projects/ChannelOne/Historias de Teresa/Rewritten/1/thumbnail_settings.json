@@ -1,0 +1,15 @@
+{
+  "bg_color": "#000000",
+  "text_font_size": 60,
+  "text_font_family": "Sans",
+  "text_bold": true,
+  "num_colors": 3,
+  "color1": "#FFFFFF",
+  "color2": "#FFD700",
+  "color3": "#ff0000",
+  "bar_color": "#DC143C",
+  "bar_text_color": "#FFFF00",
+  "bar_font_size": 55,
+  "bar_bold": true,
+  "headshot_position": "Right"
+}

@@ -95,6 +95,14 @@ class TTSProcessorApp:
         if 'tts_is_processing' not in st.session_state:
             st.session_state.tts_is_processing = False
     
+    def _load_voices_from_json(self):
+        voices_file_path = Path("voices.json")
+        if voices_file_path.exists():
+            with open(voices_file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                return data.get('voices', [])
+        return []
+
     def run(self):
         # Check if project loaded
         if not st.session_state.get('current_project_path'):
@@ -177,7 +185,7 @@ class TTSProcessorApp:
             # Voice selection
             voice = st.selectbox(
                 "Select Voice:",
-                ["af_sky", "af_bella", "af_sarah", "am_adam", "am_michael"],
+                self._load_voices_from_json(),
                 key="tts_voice"
             )
             
